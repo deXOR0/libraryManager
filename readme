@@ -1,14 +1,14 @@
 So a few disclaimer,
 
-This is not a sophisticated program or anything, its just something that comes to my mind one day, and I do it for fun.
+This is not a sophisticated program or anything, its just something that came to my mind one day, and I did it for fun.
 
 Taking that into account, you can immediately see the flaws,
 
-1. It does not have a save feature whatsoever, any changes you made on one session will not be saved, and therefore you lose some progress.
-2. The admin account details are HARDCODED, major security flaws, i know
-3. It is not functional on any scale in my opinion. It should be connected to somekind of database. But it wasn't even implemented.
+1. It does not have a save feature whatsoever, any changes you made on one session will not be saved, and therefore you lose all of your progress.
+2. The admin account details are HARDCODED, major security flaws, I know
+3. It is not functional on any scale whatsoever. It should be connected to somekind of database. But I didn't implement it.
 
-Basically I just implemented everything that I know from my 6 months journey into Java programming.
+Basically I just implemented everything that I know from my 6 months journey of Java programming.
 
 I am still working on ironing out the issues in my spare time though.
 
