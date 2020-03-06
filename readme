@@ -1,17 +1,6 @@
-So a few disclaimer,
+Update Log!
 
-This is not a sophisticated program or anything, its just something that came to my mind one day, and I did it for fun.
-
-Taking that into account, you can immediately see the flaws,
-
-1. It does not have a save feature whatsoever, any changes you made on one session will not be saved, and therefore you lose all of your progress.
-2. The admin account details are HARDCODED, major security flaws, I know
-3. It is not functional on any scale whatsoever. It should be connected to somekind of database. But I didn't implement it.
-
-Basically I just implemented everything that I know from my 6 months journey of Java programming.
-
-I am still working on ironing out the issues in my spare time though.
-
-Any feedbacks are welcomed :)
-
-Thank you
+1. Finally implemented a save feature!
+2. Save files are handled with two different txt file, one for bookdata and the other one for userdata
+3. Files are currently placed in the project folder
+4. Still working on some bugs, feedbacks are very much appreciated :D
