@@ -1,10 +1,14 @@
-package main;
+package libManager;
 
 import java.util.*;
+import java.io.*;
 
 public class Main {
 	
 	Scanner scan = new Scanner(System.in);
+	Scanner fileScan;
+	File userdata = new File("userdata.txt");
+	File bookdata = new File("bookdata.txt");
 	ArrayList<User> users = new ArrayList<>();
 	ArrayList<Book> bookList = new ArrayList<>();
 	ArrayList<Book> availableBook = new ArrayList<>();
@@ -14,6 +18,77 @@ public class Main {
 		for (int i = 0; i < 20; i++) {
 			System.out.println();
 		}
+	}
+	
+	void loadUserData() {
+		users.clear();
+		try {
+			fileScan = new Scanner(userdata);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		while (fileScan.hasNextLine()) {
+			String temp = fileScan.nextLine();
+			String[] splits = temp.split(",");
+			User thisUser = new User(splits[0], splits[1]);
+			if (splits.length > 2) {
+				for (int i = 2; i < splits.length; i += 2) {
+					Book thisBook = new Book(splits[i], splits[i + 1]);
+					thisUser.addBorrowedBooks(thisBook);
+				} 
+			}
+			users.add(thisUser);
+		}
+	}
+	
+	void loadBookData() {
+		bookList.clear();
+		try {
+			fileScan = new Scanner(bookdata);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		while (fileScan.hasNextLine()) {
+			String temp = fileScan.nextLine();
+			String[] splits = temp.split(",");
+			bookList.add(new Book(Integer.parseInt(splits[0]), Integer.parseInt(splits[1]), splits[2], splits[3]));
+		}
+	}
+	
+	void saveUserData() {
+		Formatter x = null;
+		try {
+			x = new Formatter(userdata);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (User thisUser : users) {
+			x.format("%s,%s", thisUser.getUsername(), thisUser.getPassword());
+			for (Book thisBook : thisUser.getBorrowedBooks()) {
+				x.format(",%s,%s", thisBook.getTitle(), thisBook.getAuthor());
+			}
+			x.format("\n");
+		}
+		x.close();
+		loadUserData();
+	}
+	
+	void saveBookData() {
+		Formatter x = null;
+		try {
+			x = new Formatter(bookdata);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (Book thisBook : bookList) {
+			x.format("%d,%d,%s,%s\n", thisBook.getInitialQty(), thisBook.getQty(), thisBook.getTitle(), thisBook.getAuthor());
+		}
+		x.close();
+		loadBookData();
 	}
 	
 	void adminMenu() {
@@ -123,6 +198,7 @@ public class Main {
 		if (!existed) {
 			bookList.add(new Book(initialQty, title, author));
 		}
+		saveBookData();
 		System.out.print("You have successfully added " + initialQty + " " + title + "(s) ");
 		System.out.println("by " + author);
 		scan.nextLine();
@@ -173,6 +249,7 @@ public class Main {
 						}
 						else {
 							bookList.remove(i);
+							saveBookData();
 							System.out.println("Book succesfully deleted!");
 							scan.nextLine();
 							removeBook();
@@ -185,14 +262,19 @@ public class Main {
 	
 	void userManager() {
 		clear();
-		int count = 1;
-		for (User thisUser : users) {
-			if (thisUser.getUsername().equals("admin")) {
-				continue;
-			}
-			System.out.println(count++ + ". " + thisUser.getUsername());
-			System.out.println("Books currently borrowed : " + thisUser.getBorrowedBooks().size());
-			System.out.println();
+		if (users.size() > 1) {
+			int count = 1;
+			for (User thisUser : users) {
+				if (thisUser.getUsername().equals("admin")) {
+					continue;
+				}
+				System.out.println(count++ + ". " + thisUser.getUsername());
+				System.out.println("Books currently borrowed : " + thisUser.getBorrowedBooks().size());
+				System.out.println();
+			} 
+		}
+		else {
+			System.out.println("No registered user found!");
 		}
 		scan.nextLine();
 		adminMenu();
@@ -296,6 +378,7 @@ public class Main {
 				}
 			}while (!validPassword);
 			currentUser.setPassword(password);
+			saveUserData();
 			System.out.println("You changed your password!");
 			scan.nextLine();
 			settings();
@@ -456,6 +539,8 @@ public class Main {
 						}
 					}
 				}
+				saveUserData();
+				saveBookData();
 				System.out.println("You have returned " + temp.getTitle());
 				scan.nextLine();
 				returnBook();
@@ -486,6 +571,8 @@ public class Main {
 					}
 				}
 				currentUser.getBorrowedBooks().clear();
+				saveUserData();
+				saveBookData();
 				System.out.println("You have returned all the books you borrowed!");
 				scan.nextLine();
 				returnBook();
@@ -533,6 +620,8 @@ public class Main {
 						if (bookList.get(i).getAuthor().equals(availableBook.get(choose-1).getAuthor())) {
 							bookList.get(i).setQty(bookList.get(i).getQty()-1);
 							currentUser.addBorrowedBooks(bookList.get(i));
+							saveUserData();
+							saveBookData();
 							System.out.println("Action Success!");
 							System.out.println("Visit user menu to return the book");
 							scan.nextLine();
@@ -639,6 +728,7 @@ public class Main {
 		}while (!validPassword);
 		
 		users.add(new User(username, password));
+		saveUserData();
 		System.out.println("Register Success!");
 		scan.nextLine();
 		mainMenu();
@@ -675,10 +765,8 @@ public class Main {
 	}
 	
 	public Main() {
-		users.add(new User("admin", "admin"));
-		bookList.add(new Book(5, "Harry Potter and The Order of Phoenix", "J.K. Rowling"));
-		bookList.add(new Book(2, "Jurrassic Park", "Michael Crichton"));
-		bookList.add(new Book(1, "Royal", "Meg Cabot"));
+		loadUserData();
+		loadBookData();
 		mainMenu();
 	}
 	

@@ -1,4 +1,4 @@
-package main;
+package libManager;
 
 import java.util.ArrayList;
 

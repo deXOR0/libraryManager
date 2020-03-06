@@ -1,4 +1,4 @@
-package main;
+package libManager;
 
 public class Book {
 
@@ -38,6 +38,20 @@ public class Book {
 		this.title = title;
 		this.author = author;
 	}
+	
+	public Book(int initialQty, int qty, String title, String author) {
+		super();
+		this.initialQty = initialQty;
+		this.qty = qty;
+		this.title = title;
+		this.author = author;
+	}
+	
+	public Book(String title, String author) {
+		super();
+		this.title = title;
+		this.author = author;
+	}
 
 	public int getInitialQty() {
 		return initialQty;
@@ -46,12 +60,12 @@ public class Book {
 	public void setInitialQty(int initialQty) {
 		this.initialQty = initialQty;
 		int[] arr = {1,2,3,4,5,6,7,8,9,10};
-		for (int i = 0; i < 10; i++) {
-			if (arr[i] == 5) {
-				System.out.println("Found!");
-				break;
-			}
-		}
+//		for (int i = 0; i < 10; i++) {
+//			if (arr[i] == 5) {
+//				System.out.println("Found!");
+//				break;
+//			}
+//		}
 	}
 
 	
