@@ -1,0 +1,6 @@
+5,3,Harry Potter and The Order of Phoenix,J.K. Rowling
+2,2,Jurrassic Park,Michael Crichton
+1,0,Royal,Meg Cabot
+1,1,Pulang,Tere Liye
+10,10,Lord of the Rings,J.R.R. Tolkien
+8,8,Dilan 1990,Pidi Baiq
