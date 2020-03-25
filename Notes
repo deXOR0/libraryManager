@@ -1,0 +1,13 @@
+Notes
+
+ArrayList
+ArrayList adalah sebuah struktur data pada Java. Seperti namanya, ArrayList pada dasarnya adalah sebuah Array. Namun, yang membuatnya unik, ArrayList bersifat dinamis, yang berarti, ArrayList tidak perlu initial size, dan ukurannya dapat bertambah secara dinamis. Pada awalnya, ArrayList akan memiliki size awal sebesar 10 element. Ketika ArrayList telah menampung lebih dari 10 element, maka ia akan secara otomatis menambahkan size nya, sebesar 1.5 kali. ArrayList dapat di import menggunakan keyword import java.util.ArrayList; ArrayList hanya dapat diisi element dengan tipe data Wrapper Class ataupun Class buatan User.
+
+File Processing
+Untuk melakukan file processing di Java, kita membutuhkan library io, import java io dengan keyword import java.io.*;
+
+Buatlah Object File untuk menampung File yang akan diproses.
+
+Gunakan Formatter untuk melakukan output ke file
+
+Gunakan Scanner untuk membaca dari file
