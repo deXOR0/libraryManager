@@ -11,3 +11,8 @@ Buatlah Object File untuk menampung File yang akan diproses.
 Gunakan Formatter untuk melakukan output ke file
 
 Gunakan Scanner untuk membaca dari file
+
+Java Swing
+
+Java Swing merupakan Java Foundation Class yang digunakan untuk membuat GUI atau Graphical User Interface.
+Untuk menggunakan Swing, import package javax.swing
